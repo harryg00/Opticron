@@ -1,0 +1,294 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+}
+<!--This is the CMS admin page where card information can be changed on the Index page-->
+<!--This information displays the raw information in a grid, with an edit button available for the user to edit attributes in the database-->
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="~/css/slick.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <!--Description of the page with a link back to the Index page-->
+        <h1>@ViewData["Title"]</h1>
+        <a data-toggle="modal" data-target="#newModal" class="success button" id="addButton">Add a new Card / Breadcrumb</a>
+        <a class="warning button" id="resetButton">Reset to Defaults</a>
+        <p>Use this page to edit the <a asp-area="" asp-controller="" asp-action="">home page</a> of Opticron's site</p>
+
+        <!--The table for the top image slider information-->
+        <h3>Top Slider Images:</h3>
+        <table class="table table-bordered" id="table">
+            <thead>
+                <!--Only shows the information which is used on the page which is image path (link or file path) and link-->
+                <tr>
+                    <th>Image Path</th>
+                    <th>Link</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var card in Model.Cards)
+                {
+                    if(card.Category == "TopSlider")
+                    {
+                        <!--Takes the information from the database under the category of TopSlider (same way Index.cshtml does)-->
+                        <tr data-cardId="@card.Id" class="test-@card.Id">
+                            <td class="table-card-file">
+                                <span>@card.FilePath</span>
+                            </td>
+                            <td class="table-card-link">
+                                <span>@card.Link</span>
+                            </td>
+                            <td><a data-toggle="modal" data-target="#editingModal" data-cardId="@card.Id" class="btn edit-card-button" id="pencil">&#9998;</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        <!--The table for the product information category-->
+        <h3>Product Information:</h3>
+        <table class="table table-bordered" id="table">
+            <thead>
+                <!--Only shows the information used on the page-->
+                <tr>
+                    <th>Card Name</th>
+                    <th>Card Description</th>
+                    <th>Image Path</th>
+                    <th>Link</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var card in Model.Cards)
+                {
+                    @if (card.Category == "ProductInfo")
+                    {
+                        <tr data-cardId="@card.Id" class="test-@card.Id">
+                            <td class="table-card-name">
+                                <span>@card.Title</span>
+                            </td>
+                            <td class="table-card-description">
+                                <span>@card.Description</span>
+                            </td>
+                            <td class="table-card-file">
+                                <span>@card.FilePath</span>
+                            </td>
+                            <td class="table-card-link">
+                                <span>@card.Link</span>
+                            </td>
+                            <td><a data-toggle="modal" data-target="#editingModal" data-cardId="@card.Id" class="btn edit-card-button" id="pencil">&#9998;</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        <!--The table for the Special Offer cards-->
+        <h3>Special Offer Cards:</h3>
+        <table class="table table-bordered" id="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Image Path</th>
+                    <th>Description (html)</th>
+                    <th>Link</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var card in Model.Cards)
+                {
+                    if (card.Category == "SOCard")
+                    {
+                        <tr data-cardId="@card.Id" class="test-@card.Id">
+                            <td class="table-card-title">
+                                <span>@card.Title</span>
+                            </td>
+                            <td class="table-card-file">
+                                <span>@card.FilePath</span>
+                            </td>
+                            <td class="table-card-description">
+                                <span>@card.Description</span>
+                            </td>
+                            <td class="table-card-link">
+                                <span>@card.Link</span>
+                            </td>
+                            <td><a data-toggle="modal" data-target="#editingModal" data-cardId="@card.Id" class="btn edit-card-button" id="pencil">&#9998;</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        <!--The infomration for the product categories-->
+        <h3>Product Categories:</h3>
+        <table class="table table-bordered" id="table">
+            <thead>
+                <tr>
+                    <th>Image Title</th>
+                    <th>Image Path</th>
+                    <th>Link</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var card in Model.Cards)
+                {
+                    if (card.Category == "ProductCategory")
+                    {
+                        <tr data-cardId="@card.Id" class="test-@card.Id">
+                            <td class="table-card-title">
+                                <span>@card.Title</span>
+                            </td>
+                            <td class="table-card-file">
+                                <span>@card.FilePath</span>
+                            </td>
+                            <td class="table-card-link">
+                                <span>@card.Link</span>
+                            </td>
+                            <td><a data-toggle="modal" data-target="#editingModal" data-cardId="@card.Id" class="btn edit-card-button" id="pencil">&#9998;</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        <!--The infomration for the breadcrumb links (icon or text)-->
+        <h3>Footer Breadcrumb Links:</h3>
+        <table class="table table-bordered" id="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Link</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var card in Model.Cards)
+                {
+                    if (card.Category == "BreadcrumbText" || card.Category == "BreadcrumbIcon")
+                    {
+                        <tr data-cardId="@card.Id" class="test-@card.Id">
+                            <td class="table-card-title">
+                                <span>@card.Title</span>
+                            </td>
+                            <td class="table-card-file">
+                                <span>@card.FilePath</span>
+                            </td>
+                            <td class="table-card-link">
+                                <span>@card.Link</span>
+                            </td>
+                            <td><a data-toggle="modal" data-target="#editingModal" data-cardId="@card.Id" class="btn edit-card-button" id="pencil">&#9998;</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!--The modal for editing a card's attributes-->
+    <div class="modal fade" tabindex="-1" id="editingModal" role="dialog">
+        <div class="modal-dialog" role="Card">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="grid-x grid-padding-x">
+                        <div class="large-12 cell">
+                            <!--Input box for each attribute-->
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" id="title" />
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="description" />
+                            </div>
+                            <div class="form-group">
+                                <label for="file">Image (upload as link)</label>
+                                <input type="text" class="form-control" id="file" />
+                            </div>
+                            <div class="form-group">
+                                <label for="link">Link</label>
+                                <input type="text" class="form-control" id="link" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="addModalDataDelete" class="alert button" data-dismiss="modal">Delete</button>
+                    <button type="button" id="modalClose" class="success button" data-dismiss="modal">Save</button>
+                    <!--So that a cards id can be stored-->
+                    <input type="hidden" value="" id="idHidden" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--The modal for creating a new card-->
+    <div class="modal fade" tabindex="-1" id="newModal" role="dialog">
+        <div class="modal-dialog" role="Card">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="grid-x grid-padding-x">
+                        <div class="large-12 cell">
+                            <!--Input box for information which can be input into the database-->
+                            <!--This currently does not check what is enters, which could lead to vulnerability and errors-->
+                            <!--That is something which i would add next, and could be done in HomeController or the edit.js file-->
+                            <div class="form-group">
+                                <label for="newTitle">Title</label>
+                                <input type="text" class="form-control" id="newTitle" />
+                            </div>
+                            <div class="form-group">
+                                <label for="newDescription">Description</label>
+                                <input type="text" class="form-control" id="newDescription" />
+                            </div>
+                            <div class="form-group">
+                                <label for="newFile">Image (upload as link)</label>
+                                <input type="text" class="form-control" id="newFile" />
+                            </div>
+                            <div class="form-group">
+                                <label for="newLink">Link</label>
+                                <input type="text" class="form-control" id="newLink" />
+                            </div>
+                            <div class="form-group">
+                                <!--Drop down to select the category to insert into-->
+                                <label for="category">Category</label>
+                                <select id="category" name="category">
+                                    <option value="ProductInfo">Product Information</option>
+                                    <option value="SOCard">Special Offer</option>
+                                    <option value="TopSlider">Slider Image</option>
+                                    <option value="ProductCategory">Product Category</option>
+                                    <option value="BreadcrumbText">Breadcrumb Text</option>
+                                    <option value="BreadcrumbIcon">Breadcrumb Icon</option>
+                                </select>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="addModalClose" class="primary button" data-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--This is how the js ajax calls are linked to the HomeController function-->
+    <!--Sets the name of the function, and the controller-->
+    @section scripts {
+    <script>
+        var getCardUrl = '@Url.Action("GetCard", "Home")';
+        var updateCard = '@Url.Action("UpdateCard", "Home")';
+        var newCard = '@Url.Action("NewCard", "Home")';
+        var deleteCard = '@Url.Action("DeleteCard", "Home")';
+        var resetDatabase = '@Url.Action("ResetDatabase", "Home")';
+    </script>
+    <script src="~/js/edit.js"></script>
+    }
+</body>
+
+</html>

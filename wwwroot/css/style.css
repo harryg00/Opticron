@@ -1,0 +1,205 @@
+﻿/* 
+    This is the Style sheet which is used for all views
+    This contains the styling for body HTML, including Slick.js sliders
+*/
+
+/* Index.cshtml Styling: */
+
+/* This is the styling for the slick.js slider at the top of the Home Page*/
+
+.slider-image img {
+    min-width: 100%; /* Cover the full width of the page */
+    height: auto; /* Automatically change the height (so it is not distorted) */
+}
+
+
+/* Customize Slick dots. These are shown at the bottom center of the image, as a green (selected) / white dot */
+.slick-dots {
+    position: absolute;
+    bottom: 20px;
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+    .slick-dots li {
+        display: inline-block;
+        margin: 0 5px; /* Spacing between dots */
+    }
+
+        .slick-dots li button {
+            background-color: white; /* Color of inactive dot */
+            width: 20px; /* Size of dot */
+            height: 20px;
+            border-radius: 50%; /* Shape of dot */
+            border: none;
+            cursor: pointer;
+            font-size: 0px;
+        }
+
+            .slick-dots li button:hover,
+            .slick-dots li.slick-active button {
+                background-color: green; /* Color of active dot */
+                width: 15px; /* Size of dot */
+                height: 15px;
+            }
+
+/* This is the styling for the second slider - this one uses arrows instead of dots */
+
+.slick-prev,
+.slick-next {
+    position: absolute;
+    top: 50%;
+    color: black;
+    transform: translateY(-50%);
+    z-index: 1;
+    font-size: 0px;
+    width: 40px; /* Adjust arrow width */
+    height: 40px; /* Adjust arrow height */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .slick-prev:hover,
+    .slick-next:hover {
+        background-color: rgba(0, 0, 0, 0.7); /* Background cover on hover */
+    }
+
+.slick-prev {
+    left: -25px; /* Have the arrow slightly to the left so it does not cover the image */
+}
+
+.slick-next {
+    right: -10px; /* Have the arrow slightly to the right so it does not cover the image */
+}
+
+.slick-prev:before {
+    content: '<'; /* The left arrow */
+    font-weight: 900;
+    font-size: 30px;
+    color: black;
+}
+
+.slick-next:before {
+    content: '>'; /* The right arrow */
+    font-weight: 900;
+    font-size: 30px;
+    color: black;
+}
+
+/* This is the product information section styling (New Products / Field Events..) */
+.grid-x {
+    margin-top: 30px; /* Spacing from the top slider */
+}
+
+.card {
+    border-color: transparent; /* So it matches the page's colour */
+}
+
+/* The title (New Products / Field Events...) */
+.card-divider {
+    background-color: white;
+    font-size: 24px;
+    color: grey;
+    padding-left: 0px;
+}
+
+/* The description below */
+.card-section {
+    background-color: white;
+    border-color: white;
+    font-size: 14px;
+    padding-left: 0px;
+}
+
+    /* The button below taking the user to the relevant page */
+    .card-section .button {
+        background-color: forestgreen;
+        padding-right: 30px;
+        color: white;
+    }
+
+
+/* This is the Special Offers styling */
+
+/* This is the callout (see Foundation.css) */
+.callout {
+    margin-top: 20px; /* Spacing from Product Information */
+    margin-left: 0px;
+    padding-block-start: 30px;
+    text-align: center;
+    color: gray;
+    border-color: #E6E7E8;
+    background-color: #E6E7E8;
+}
+
+    /* This is for the cards themselves */
+    .callout .card {
+        border-color: #E6E7E8;
+        position: relative;
+    }
+
+    /* The button to view all offers at the bottom of the callout */
+    .callout .button {
+        background-color: forestgreen;
+        color: white;
+        margin-left: 45%;
+        margin-top: 15px;
+    }
+
+/* Styling the text at the bottom of each card */
+.cell .card .card-section {
+    color: gray;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+/* Each card has an 'a' tag which the allows the user to click on specifc card - Link modified by the admin */
+.card-link {
+    /* Styling the a tag so it covers the entire card */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* This is the styling for the bottom Slick.js slider */
+.container .slider-area {
+    margin-top: 50px;
+    text-align: center;
+}
+
+/* This section handles the changes in css for when the screen size is tablet / mobile orientated */
+
+/* Styling for screens below 996px (tablet) */
+@media (max-width: 996px) {
+    /* Remove the margins of the container so that the content can fill the page width */
+    .container {
+        margin: 0px;
+        max-width: 100%;
+    }
+
+    /* Have the product information be a grid of 2 x 2 instead of 1 x 4 */
+    .large-3.cell {
+        flex-basis: calc(50% - 20px); /* 50% width for each cell with 20px margin */
+    }
+
+    /* Have the Special offer cards be 3 x 1 grid instead of 1 x 3 */
+    .large-4.cell {
+        flex-basis: 100%; /* Cover the entire container */
+    }
+}
+
+/* Styling for screens below 600px (mobile) */
+@media (max-width: 600px) {
+    /* Have the product information be a grid of 4 x 1 instead of 1 x 4 (vertical layout) */
+    .large-3.cell {
+        flex-basis: calc(100% - 10px); /* 100% width with 10px margins */
+    }
+}
+
+/* Styling for the Edit.cshtml page could be added here, but was not necessary for this */

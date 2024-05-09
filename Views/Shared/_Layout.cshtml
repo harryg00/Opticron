@@ -1,0 +1,109 @@
+﻿<!--This is a shared layout, which is used across all other views-->
+<!--The shared layout contains the pages header and footer, as these should be the same across all pages-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - VertoTest</title> <!--Page Name-->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/foundation.css" asp-append-version="true" /> <!--Foundation style sheet-->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+<body>
+    <!--The header, containing the logo, navbar, and search bar-->
+    <header class="gray-header">
+        <div class="container">
+            <div class="title-bar" data-responsive-toggle="responsive-menu">
+                <!--Logo and button redirecting to the CMS page (Edit.cshtml)-->
+                <div class="title-bar-title">
+                    <a asp-area="" asp-controller="" asp-action=""><img src="~/res/OpticronLogo.png" width="150" height="50" /></a>
+                    <a type="button" class="success button" asp-area="" asp-controller="Home" asp-action="Edit">Edit</a>
+                </div>
+            </div>
+
+            <!--Navbar containing blank a tags (no sub pages required)-->
+            <div class="top-bar container" id="responsive-menu">
+                <ul class="dropdown menu" data-dropdown-menu>
+                    <li><a>Our Products</a></li>
+                    <li><a>Where to Buy</a></li>
+                    <li><a>News & Reviews</a></li>
+                    <li><a>Help & Support</a></li>
+                    <li><a>My Opticron</a></li>
+                </ul>
+                <!--The benu button which is visible for mobile and tablet devices-->
+                <div class="menu-toggle" id="menu-button">Menu &#9776;</div>
+
+                <!--Search text input and button-->
+                <div class="top-bar-right">
+                    <ul class="menu">
+                        <li><input type="search" placeholder="My Opticron..." /></li>
+                        <li><button type="button" class="button">&#128269</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header> 
+
+    <!--This renders the body of the page, bodies are in Views - Home-->
+    <!--The home controller is responsible for returning these views-->
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!--The footer containing breadcrumbs and email / phone details-->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid-x grid-padding-x">
+                <div class="large-8 medium-8 cell">
+                    <h6><b>Optricon</b> Unit 21, Tital Court, Laporte Way, Luton, Bedfordshire, LU4 8EF, UK</h6>
+
+                    <!--Takes the breadcrumbs which are stored in the Opticron - HTMLCards table-->
+                    <!--The breadcrumb links can be changed by the user in the Edit page-->
+                    <nav aria-label="Breadcrumbs:" role="navigation">
+                        <ul class="breadcrumbs">
+                            @foreach (var card in Model.Cards)
+                            {
+                                <!--If it is breadcrumb text (Site Map / Privacy...)-->
+                                if (card.Category == "BreadcrumbText")
+                                {
+                                    <!--The text for the breadcrumb (Site Map / Privacy...) is the a tag content-->
+                                    <!--The link for the breadcrumb (Whatever the user wants, default = #, is the href-->
+                                    <li><a href=@card.Link>@card.Title</a></li>
+                                }
+                            }
+                        </ul>
+                    </nav>
+                </div>
+                <div class="large-4 medium-4 cell">
+                    <h4>call <b>01582 726522</b></h4> 
+                    <h5><b>email us</b> sales@opticron.co.uk</h5>
+                    <!--Takes the breadcrumbs which are stord in the Opticron - HTMLCards table-->
+                    <!--The breadcrumb images and links can be changed in the Edit page-->
+                    <nav aria-label="Social Media Links:" role="navigation">
+                        <ul class="breadcrumbs">
+                            @foreach (var card in Model.Cards)
+                            {
+                                <!--If it is a breadcrumb link / image (Facebook Logo / Twitter Logo...)-->
+                                if (card.Category == "BreadcrumbIcon")
+                                {
+                                    <!--Link is the a tag's href, the logo (FilePath) is the content of the a tag-->
+                                    <li><a href=@card.Link><img src="@card.FilePath" /></a></li>
+                                }
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="~/js/slick.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,93 @@
+/* 
+    This is the Style sheet which is used for the shared layout 
+    This contains the styling for the header and footer. 
+*/
+
+/* Header */
+
+/* Hide the hamburger menu by default */
+.menu-toggle {
+    display: none;
+}
+
+/* Make the manu text color grey */
+.menu {
+    color: grey;
+}
+
+/* Display the top navbar by default */
+.top-bar .dropdown {
+    display: contents;
+}
+
+/* Distance between text on top dropdown (navbar) */
+.dropdown.menu > li > a {
+    padding: 0.25rem 0.6rem;
+}
+
+/* The dropdown (navbar) styling */
+.title-bar {
+    padding-top: 1rem;
+    padding-left: 0.25rem;
+    margin-bottom: 0rem;
+}
+
+/* The header colour (grey) */
+.gray-header {
+    background-color: #E6E7E8;
+}
+
+/* The search button (magnifying glass) colour */
+.top-bar-right button {
+    background-color: lightgray;
+}
+
+/* Footer Styling */
+
+/* Set to fill the bottom section (auto height and width) and colour of grey */
+.footer {
+    height: auto;
+    width: auto;
+    background-color: #BBBDBF;
+}
+
+    /* The cell is the breadcrumb text and icons*/
+    .footer .cell {
+        padding-top: 50px; /* Distance from top of footer */
+        color: white;
+    }
+
+    /* Size for the images */
+    .footer .breadcrumbs img {
+        max-width: 25px;
+        height: auto;
+        font-size: 20px;
+    }
+
+    /* The breadcrumb text styling (Site Map / Privacy...) */
+    .footer .breadcrumbs li > a {
+        color: white;
+        background-color: #BBBDBF;
+        margin-block: 20px;
+        margin-left: 0px;
+    }
+
+/* Media query to show the hamburger menu toggle button and hide the original dropdown menu when screen width is below 1013px (size menu takes up) */
+@media (max-width: 1013px) {
+    /* Show the hamburger menu toggle button */
+    .menu-toggle {
+        display: contents;
+        cursor: pointer;
+        color: green;
+    }
+
+    /* Hide the original dropdown menu */
+    .top-bar .dropdown {
+        display: none;
+    }
+
+    /* Change the footer so that each section (breadcrumb text / icon) is stacked */
+    .large-8.cell {
+        flex-basis: 100%; /* Grid of 2 x 1 instead of 1 x 2 */
+    }
+}

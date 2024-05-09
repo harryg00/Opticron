@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Home Page"; // The title of the page
+}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/css/slick.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+
+<body>
+    <div class="slider-area bg-image">
+        <div class="slider-image">
+            <!--For each card in TopSlider category stored in the database-->
+            @foreach (var card in Model.Cards)
+            {
+                if(card.Category == "TopSlider")
+                {
+                    // Show the image (using filepath / link which is stored in the database)
+                    // With the link that is also stored in the database (card.Link)
+                    <div><img src="@card.FilePath" /><a href=@card.Link class="card-link"></a></div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="container">
+        <!--Information Pannel-->
+        <!--The cards stored in database under the category "ProductInfo" are shown here with their title, image, description and link-->
+        <div class="grid-x grid-padding-x">
+            @foreach (var card in Model.Cards)
+            {
+                @if (card.Category == "ProductInfo")
+                {
+                    <div data-cardId="@card.Id" class="large-3 medium-3 small-3 cell">
+                        <div class="card">
+                            <div class="card-divider">
+                                <span>@card.Title</span>
+                            </div>
+                            <div class="card-image">
+                                <img src="@card.FilePath" />
+                            </div>
+                            <div class="card-section">
+                                <p>@card.Description</p>
+                                <a type="button" class="success button" href="@card.Link">New Products</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <!--Special Offers-->
+        <!--The cards stored in the database under the category "SOCard" are shown here with their image, description and link-->
+        <div class="callout">
+            <h4>Special Offers</h4>
+            <div class="grid-x grid-padding-x">
+                @foreach (var card in Model.Cards)
+                {
+                    @if (card.Category == "SOCard" && card.FilePath != null)
+                    {
+                        <div class="large-4 medium-4 small-4 cell">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="@card.FilePath" />
+                                </div>
+                                <div class="card-section">
+                                    @Html.Raw(card.Description)
+                                    <!--Stored as raw HTML so that there is a line break and a bold statement-->
+                                </div>
+                                <a href=@card.Link class="card-link"></a>
+                            </div>
+                        </div>
+                    }
+                    @if (card.Category == "SOCard" && card.FilePath == null)
+                    {
+                        <!--The button is also stored in the database, as an example of the user being able to change the button redirects-->
+                        <button type="button" class="success button"><a href=@card.Link class="card-link"></a>@card.Title</button>
+                    }
+                }
+            </div>
+        </div>
+
+        <!--Product Categories-->
+        <!--The card stored in the database under the category "ProductCategory" are shown here with their image, title, and link-->
+        <div class="slider-area">
+            <h4>Product Categories</h4>
+            <div class="slider-card">
+                <div class="grid-x grid-padding-x" id="productCategories">
+                    @foreach (var card in Model.Cards)
+                    {
+                        @if (card.Category == "ProductCategory")
+                        {
+                            <div class="large-3 medium-3 small-3 cell">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="@card.FilePath" class="center" />
+                                    </div>
+                                    <div class="card-section">
+                                        <p>@card.Title</p>
+                                    </div>
+                                    <a href=@card.Link class="card-link"></a>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+
+</html>
+
