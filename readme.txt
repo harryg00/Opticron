@@ -8,7 +8,8 @@ Edit.cshtml is the CMS admin page where information is seeded into the database 
 Site.css defines the styling for the header and footer (HTML in Views -> Shared -> _Layout.cshtml)
 Style.css defines the styling for the body of Index.cshtml. It includes the styling for the sliders, as well as the information displayed (such as cards)
 wwwroot -> sql -> ResetDatabase.sql is an SQL query used to reset the database to default values. Other queries can be added here, some queries are stored as a string in HomeController.cs
-The database itself is stored locally in ./VertoTest/bin/Debug/net8.0/Optricon.mdf
+The database itself is stored locally in VertoTest/bin/Debug/net8.0/Optricon.mdf
+- In the event the database does not get pulled from this repo (thus causing an error), download the two files from the zip folder (OpticronDB.zip) and place them in VertoTest/bin/Debug/net8.0
 See comments on individual files for more specific information relating to its need / function. 
 
 The project can be opened in Visual Studio Community (and ran from in there) using VertoTest.sln
