@@ -1,4 +1,7 @@
 Harry Goswell – Virto Competency Test Documentation
+
+View the PNG files for an image layout of what this website looks like.
+
 Overview:
 This project contains 3 main HTML files, 2 main CSS files, and 2 JS files. 
 Index.cshtml is the home page, which takes information stored in the database, and represents as HTML
