@@ -1,4 +1,4 @@
-Harry Goswell – Virto Competency Test Documentation
+Harry Goswell – ASP.net MVC demonstration. <30 hours challenge
 
 View the PNG files for an image layout of what this website looks like.
 
@@ -15,4 +15,4 @@ The database itself is stored locally in VertoTest/bin/Debug/net8.0/Optricon.mdf
 - In the event the database does not get pulled from this repo (thus causing an error), download the two files from the zip folder (OpticronDB.zip) and place them in VertoTest/bin/Debug/net8.0
 See comments on individual files for more specific information relating to its need / function. 
 
-The project can be opened in Visual Studio Community (and ran from in there) using VertoTest.sln
+The project can be opened in Visual Studio (and ran from in there) using VertoTest.sln
